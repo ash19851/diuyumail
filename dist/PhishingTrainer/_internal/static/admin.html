@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>钓鱼培训管理平台</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    background: #f3f4f6;
+    color: #1f2937;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* === SIDEBAR === */
+.sidebar {
+    width: 220px; background: #111827; color: #fff;
+    display: flex; flex-direction: column; flex-shrink: 0;
+}
+.sidebar .logo {
+    padding: 22px 18px; font-size: 15px; font-weight: 700;
+    border-bottom: 1px solid #1f2937;
+    display: flex; align-items: center; gap: 8px;
+}
+.sidebar .logo i { color: #f59e0b; font-size: 18px; }
+.sidebar nav { flex: 1; padding: 8px 0; }
+.sidebar nav a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 18px; color: #9ca3af; text-decoration: none;
+    font-size: 13px; transition: all 0.15s; border-left: 3px solid transparent;
+}
+.sidebar nav a:hover { color: #fff; background: #1f2937; }
+.sidebar nav a.active { color: #fff; background: #1f2937; border-left-color: #f59e0b; }
+.sidebar .status-bar { padding: 12px 18px; border-top: 1px solid #1f2937; font-size: 11px; color: #6b7280; }
+
+/* === MAIN === */
+.main { flex: 1; overflow-y: auto; }
+.main .topbar {
+    background: #fff; border-bottom: 1px solid #e5e7eb;
+    padding: 14px 24px; display: flex; justify-content: space-between; align-items: center;
+}
+.main .topbar h2 { font-size: 16px; }
+.main .topbar .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+.main .topbar .status-dot.online { background: #22c55e; }
+.main .topbar .status-dot.offline { background: #ef4444; }
+
+.page { display: none; padding: 24px; }
+.page.active { display: block; animation: fadeIn 0.25s; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* === CARDS === */
+.card {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 8px;
+    margin-bottom: 20px; overflow: hidden;
+}
+.card-header {
+    padding: 14px 20px; border-bottom: 1px solid #e5e7eb;
+    font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px;
+}
+.card-body { padding: 20px; }
+
+/* === FORM === */
+.form-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px; margin-bottom: 10px;
+}
+.form-group { margin-bottom: 10px; }
+.form-group label {
+    display: block; font-size: 12px; font-weight: 600; color: #6b7280;
+    margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.form-group input, .form-group select {
+    width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px;
+    font-size: 13px; font-family: inherit; transition: border-color 0.15s;
+}
+.form-group input:focus, .form-group select:focus {
+    outline: none; border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.1);
+}
+
+.btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 20px; border: none; border-radius: 6px;
+    font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s;
+    font-family: inherit;
+}
+.btn-primary { background: #f59e0b; color: #111; }
+.btn-primary:hover { background: #d97706; }
+.btn-blue { background: #2563eb; color: #fff; }
+.btn-blue:hover { background: #1d4ed8; }
+.btn-red { background: #dc2626; color: #fff; }
+.btn-red:hover { background: #b91c1c; }
+.btn-green { background: #16a34a; color: #fff; }
+.btn-green:hover { background: #15803d; }
+.btn-gray { background: #e5e7eb; color: #374151; }
+.btn-gray:hover { background: #d1d5db; }
+.btn-sm { padding: 5px 12px; font-size: 11px; }
+
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* === STATS ROW === */
+.stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px;
+}
+.stat-card {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 8px;
+    padding: 18px; text-align: center;
+}
+.stat-card .val { font-size: 28px; font-weight: 700; color: #111827; }
+.stat-card .lbl { font-size: 11px; color: #6b7280; margin-top: 4px; }
+
+/* === TABLE === */
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th { background: #f9fafb; padding: 8px 12px; text-align: left; font-weight: 600; color: #6b7280; border-bottom: 2px solid #e5e7eb; }
+td { padding: 8px 12px; border-bottom: 1px solid #f3f4f6; }
+tr:hover td { background: #f9fafb; }
+.badge {
+    display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600;
+}
+.badge-red { background: #fee2e2; color: #dc2626; }
+.badge-green { background: #dcfce7; color: #16a34a; }
+.badge-yellow { background: #fef3c7; color: #d97706; }
+
+/* === TEMPLATE PREVIEW === */
+.tpl-preview {
+    background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px;
+    padding: 20px; margin-top: 12px; max-height: 400px; overflow-y: auto;
+    font-size: 11px;
+}
+.tpl-preview iframe {
+    width: 100%; height: 340px; border: none; background: #fff;
+}
+
+/* === LOG === */
+.log-box {
+    background: #111827; color: #22c55e; font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 12px; padding: 14px; border-radius: 6px; max-height: 260px; overflow-y: auto;
+    line-height: 1.7; white-space: pre-wrap; margin-top: 12px;
+}
+.log-box .log-error { color: #ef4444; }
+.log-box .log-warn { color: #f59e0b; }
+.log-box .log-info { color: #60a5fa; }
+
+/* === TAB === */
+.tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 2px solid #e5e7eb; }
+.tab-btn {
+    padding: 8px 16px; border: none; background: none; cursor: pointer;
+    font-size: 13px; color: #6b7280; font-family: inherit; font-weight: 500;
+    border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s;
+}
+.tab-btn.active { color: #111827; border-bottom-color: #f59e0b; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.toast {
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    padding: 12px 20px; border-radius: 6px; font-size: 13px; color: #fff;
+    animation: slideIn 0.3s ease; opacity: 0; transition: opacity 0.3s;
+}
+.toast.show { opacity: 1; }
+.toast.success { background: #16a34a; }
+.toast.error { background: #dc2626; }
+@keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+@media (max-width: 768px) {
+    .sidebar { width: 60px; }
+    .sidebar .logo span, .sidebar nav a span { display: none; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="logo"><i class="fas fa-fish"></i> <span>钓鱼培训管理</span></div>
+    <nav>
+        <a href="#" data-page="config" class="active"><i class="fas fa-cog"></i> <span>邮件发送配置</span></a>
+        <a href="#" data-page="campaign"><i class="fas fa-bullhorn"></i> <span>活动设置</span></a>
+        <a href="#" data-page="send"><i class="fas fa-paper-plane"></i> <span>发送控制</span></a>
+        <a href="#" data-page="history"><i class="fas fa-chart-bar"></i> <span>历史数据</span></a>
+    <a href="#" data-page="users"><i class="fas fa-users-cog"></i> <span>用户管理</span></a>
+        </nav>
+    <div class="status-bar" id="status-bar">🟢 服务器运行中</div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+    <div class="topbar">
+        <h2 id="page-title">邮件发送配置</h2>
+        <span>
+                <span style="margin-right:12px;font-size:12px;color:#6b7280;">👤 <span id="login-user">-</span></span>
+                <span class="status-dot online"></span> 服务器运行中 · 端口 <span id="port-display">5000</span>
+                <a href="/admin/logout" style="margin-left:12px;font-size:12px;color:#dc2626;text-decoration:none;">退出登录</a>
+            </span>
+    </div>
+
+    <!-- PAGE: CONFIG -->
+    <div class="page active" id="page-config">
+        <div class="card">
+            <div class="card-header"><i class="fas fa-server"></i> SMTP 邮件服务器配置</div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>SMTP 服务器地址</label>
+                        <input type="text" id="cfg-smtp-server" placeholder="smtp.office365.com">
+                    </div>
+                    <div class="form-group">
+                        <label>SMTP 端口</label>
+                        <input type="number" id="cfg-smtp-port" placeholder="587">
+                    </div>
+                    <div class="form-group">
+                        <label>发件人邮箱</label>
+                        <input type="email" id="cfg-sender-email" placeholder="hr@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label>邮箱密码 / 授权码</label>
+                        <input type="password" id="cfg-sender-password" placeholder="输入密码">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>跟踪服务器 URL</label>
+                        <input type="text" id="cfg-base-url" placeholder="http://your-server:5000">
+                    </div>
+                    <div class="form-group">
+                        <label>监听端口</label>
+                        <input type="number" id="cfg-server-port" placeholder="5000">
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="saveConfig()"><i class="fas fa-save"></i> 保存配置</button>
+                <button class="btn btn-gray" onclick="loadConfig()" style="margin-left:8px;"><i class="fas fa-undo"></i> 重新加载</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE: CAMPAIGN -->
+    <div class="page" id="page-campaign">
+        <div class="card">
+            <div class="card-header"><i class="fas fa-envelope"></i> 活动参数</div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>活动名称</label>
+                        <input type="text" id="cfg-campaign-name" placeholder="2026年度安全意识培训">
+                    </div>
+                    <div class="form-group">
+                        <label>邮件主题</label>
+                        <input type="text" id="cfg-email-subject" placeholder="邮件主题行">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-fish"></i> 钓鱼邮件模板选择</div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group" style="grid-column:1/-1;">
+                        <label>邮件模板</label>
+                        <select id="cfg-email-template" onchange="previewEmailTemplate();loadTemplateEditor('email', this.value)">
+                            <option value="hr_bonus">HR — 年终绩效奖金确认通知</option>
+                            <option value="it_maintenance">IT — 系统维护升级通知</option>
+                            <option value="shared_document">共享 — 内部文件分享通知</option>
+                            <option value="ceo_message">CEO — 组织架构调整重要通知</option>
+                            <option value="invoice_notice">财务 — 差旅费用报销审核通知</option>
+                            <option value="meeting_invite">总经办 — 战略规划会议邀请</option>
+                            <option value="security_compliance">信息安全 — 年度合规自查通知</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="tpl-preview" id="email-preview"><p style="color:#888;text-align:center;">选择模板后显示预览...</p></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><i class="fas fa-exclamation-triangle"></i> 警示页面模板选择</div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group" style="grid-column:1/-1;">
+                        <label>警示页面样式（用户点击链接后最终看到的培训页面）</label>
+                        <select id="cfg-warning-template" onchange="previewWarningTemplate();loadTemplateEditor('warning', this.value)">
+                            <option value="cyberpunk">暗黑科技风（Cyberpunk）</option>
+                            <option value="corporate">企业商务风（Corporate）</option>
+                            <option value="clean">简洁清爽风（Clean）</option>
+                            <option value="minimal">极简深色风（Minimal）</option>
+                            <option value="education">教育引导风（Education）</option>
+                            <option value="tech">终端黑客风（Terminal）</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="tpl-preview" id="warning-preview"><p style="color:#888;text-align:center;">选择模板后显示预览...</p></div>
+            </div>
+        </div>
+
+        <div class="card" id="template-editor-card" style="display:none;">
+            <div class="card-header"><i class="fas fa-edit"></i> 模板文本编辑 — <span id="editor-tpl-name">-</span></div>
+            <div class="card-body" id="template-editor-body">
+                <p style="color:#888;text-align:center;">选择上方模板后在此编辑可自定义的文本内容</p>
+            </div>
+            <div class="card-body" style="border-top:1px solid #e5e7eb;">
+                <button class="btn btn-primary" onclick="saveTemplateText()"><i class="fas fa-save"></i> 保存模板文本</button>
+                <button class="btn btn-gray" onclick="resetTemplateText()" style="margin-left:8px;"><i class="fas fa-undo"></i> 恢复默认</button>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="saveConfig()"><i class="fas fa-save"></i> 保存活动设置</button>
+    </div>
+
+    <!-- PAGE: SEND -->
+    <div class="page" id="page-send">
+        <div class="card">
+            <div class="card-header"><i class="fas fa-list"></i> 目标邮箱列表</div>
+            <div class="card-body">
+                <p style="font-size:13px;color:#6b7280;margin-bottom:10px;">
+                    邮件将从程序同目录下的 <strong>maillist.xlsx</strong> 文件中读取（读取第一列）。
+                    共 <strong id="target-count">-</strong> 个目标邮箱。
+                </p>
+                <button class="btn btn-gray btn-sm" onclick="refreshTargetList()"><i class="fas fa-sync"></i> 刷新列表</button>
+                <div style="margin-top:10px;max-height:200px;overflow-y:auto;background:#f9fafb;border: 1px solid #e5e7eb;border-radius:6px;padding:10px;">
+                    <table id="target-table"><tr><td style="color:#888;">点击刷新查看...</td></tr></table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header"><i class="fas fa-paper-plane"></i> 发送控制</div>
+            <div class="card-body">
+                <p style="font-size:13px;color:#6b7280;margin-bottom:12px;">
+                    确认以上配置无误后，点击按钮启动钓鱼邮件发送。发送过程不可中断。
+                </p>
+                <button class="btn btn-red" id="btn-send" onclick="startCampaign()"><i class="fas fa-paper-plane"></i> 开始发送</button>
+                <button class="btn btn-gray" id="btn-stop" onclick="stopCampaign()" style="display:none;margin-left:8px;">停止</button>
+                <div class="log-box" id="send-log" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE: USERS -->
+    <div class="page" id="page-users">
+        <div class="card">
+            <div class="card-header"><i class="fas fa-users-cog"></i> 管理员用户管理</div>
+            <div class="card-body">
+                <div class="form-row" style="max-width:500px;">
+                    <div class="form-group">
+                        <label>新管理员用户名</label>
+                        <input type="text" id="new-admin-user" placeholder="输入用户名">
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="password" id="new-admin-pass" placeholder="输入密码">
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addAdmin()"><i class="fas fa-plus"></i> 添加管理员</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header"><i class="fas fa-list"></i> 当前管理员列表</div>
+            <div class="card-body" style="overflow-x:auto;">
+                <table id="admins-table"><tr><td style="color:#888;">加载中...</td></tr></table>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE: HISTORY -->
+    <div class="page" id="page-history">
+        <div class="stats-row" id="overall-stats">
+            <div class="stat-card"><div class="val" id="stat-campaigns">0</div><div class="lbl">历史活动总数</div></div>
+            <div class="stat-card"><div class="val" id="stat-targets">0</div><div class="lbl">累计发送目标</div></div>
+            <div class="stat-card"><div class="val" id="stat-clicks">0</div><div class="lbl">累计点击次数</div></div>
+            <div class="stat-card"><div class="val" id="stat-rate">0%</div><div class="lbl">总体命中率</div></div>
+        </div>
+
+        <div class="tabs" id="history-tabs">
+            <button class="tab-btn active" data-tab="tab-campaigns">活动列表</button>
+            <button class="tab-btn" data-tab="tab-victims">受害者详情</button>
+            <button class="tab-btn" data-tab="tab-repeat">重复中招用户</button>
+        </div>
+
+        <div class="tab-panel active" id="tab-campaigns">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-list"></i> 历次活动</div>
+                <div class="card-body" style="overflow-x:auto;">
+                    <table id="campaigns-table"><tr><td style="color:#888;">加载中...</td></tr></table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-panel" id="tab-victims">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-users"></i> 受害者清单 <span style="font-weight:400;font-size:12px;color:#6b7280;">（筛选：</span>
+                    <select id="victim-filter" onchange="loadVictims()" style="font-size:12px;padding:2px 6px;">
+                        <option value="">全部活动</option>
+                    </select>）
+                </div>
+                <div class="card-body" style="overflow-x:auto;">
+                    <table id="victims-table"><tr><td style="color:#888;">加载中...</td></tr></table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-panel" id="tab-repeat">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-exclamation-circle"></i> 重复中招用户（>=2次）</div>
+                <div class="card-body" style="overflow-x:auto;">
+                    <table id="repeat-table"><tr><td style="color:#888;">加载中...</td></tr></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== NAVIGATION =====
+document.querySelectorAll('.sidebar nav a').forEach(a => {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.sidebar nav a').forEach(x => x.classList.remove('active'));
+        this.classList.add('active');
+        const page = this.dataset.page;
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page-' + page).classList.add('active');
+        document.getElementById('page-title').textContent = this.textContent.trim();
+        if (page === 'history') { refreshHistory(); }
+        if (page === 'send') { refreshTargetList(); }
+        if (page === 'users') { loadAdmins(); }
+    });
+});
+
+// ===== TABS =====
+document.getElementById('history-tabs').addEventListener('click', function(e) {
+    if (e.target.classList.contains('tab-btn')) {
+        document.querySelectorAll('#history-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        document.querySelectorAll('#page-history .tab-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(e.target.dataset.tab).classList.add('active');
+        if (e.target.dataset.tab === 'tab-victims') loadVictims();
+        if (e.target.dataset.tab === 'tab-repeat') loadRepeatVictims();
+    }
+});
+
+// ===== TOAST =====
+function showToast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.className = 'toast ' + type + ' show';
+    setTimeout(() => { t.classList.remove('show'); }, 3000);
+}
+
+// ===== API HELPERS =====
+async function api(url, opts = {}) {
+    try {
+        const res = await fetch(url, opts);
+        return await res.json();
+    } catch(e) {
+        showToast('请求失败: ' + e.message, 'error');
+        return null;
+    }
+}
+
+// ===== CONFIG =====
+async function loadConfig() {
+    const data = await api('/admin/api/config');
+    if (!data) return;
+    document.getElementById('cfg-smtp-server').value = data.smtp_server || '';
+    document.getElementById('cfg-smtp-port').value = data.smtp_port || 25;
+    document.getElementById('cfg-sender-email').value = data.sender_email || '';
+    document.getElementById('cfg-sender-password').value = data.sender_password || '';
+    document.getElementById('cfg-base-url').value = data.base_url || '';
+    document.getElementById('cfg-server-port').value = data.server_port || 5000;
+    document.getElementById('cfg-campaign-name').value = data.campaign_name || '';
+    document.getElementById('cfg-email-subject').value = data.email_subject || '';
+    document.getElementById('cfg-email-template').value = data.email_template || 'hr_bonus';
+    document.getElementById('cfg-warning-template').value = data.warning_template || 'cyberpunk';
+    document.getElementById('port-display').textContent = data.server_port || 5000;
+    previewEmailTemplate();
+    previewWarningTemplate();
+    loadTemplateEditor('email', data.email_template || 'hr_bonus');
+}
+
+async function saveConfig() {
+    const updates = {
+        smtp_server: document.getElementById('cfg-smtp-server').value,
+        smtp_port: parseInt(document.getElementById('cfg-smtp-port').value) || 25,
+        sender_email: document.getElementById('cfg-sender-email').value,
+        sender_password: document.getElementById('cfg-sender-password').value,
+        base_url: document.getElementById('cfg-base-url').value,
+        server_port: parseInt(document.getElementById('cfg-server-port').value) || 5000,
+        campaign_name: document.getElementById('cfg-campaign-name').value,
+        email_subject: document.getElementById('cfg-email-subject').value,
+        email_template: document.getElementById('cfg-email-template').value,
+        warning_template: document.getElementById('cfg-warning-template').value
+    };
+    const data = await api('/admin/api/config', {
+        method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(updates)
+    });
+    if (data && data.status === 'ok') {
+        showToast('配置已保存', 'success');
+        document.getElementById('port-display').textContent = updates.server_port;
+    }
+}
+
+// ===== TEMPLATE PREVIEW =====
+function previewEmailTemplate() {
+    const tpl = document.getElementById('cfg-email-template').value;
+    const names = {
+        hr_bonus: 'HR年终绩效奖金确认', it_maintenance: 'IT系统维护升级', shared_document: '内部文件分享',
+        ceo_message: 'CEO组织架构调整通知', invoice_notice: '财务差旅报销审核', meeting_invite: '战略规划会议邀请', security_compliance: '信息安全合规自查'
+    };
+    const colors = {
+        hr_bonus: '#1e3c72', it_maintenance: '#27ae60', shared_document: '#6c3483',
+        ceo_message: '#c0392b', invoice_notice: '#e67e22', meeting_invite: '#2c3e50', security_compliance: '#0e6655'
+    };
+    const bodies = {
+        hr_bonus: '2026年度绩效评估已结束，请点击按钮查看奖金明细。',
+        it_maintenance: '系统升级在即，请提前完成账户兼容性验证。',
+        shared_document: 'wang.lei@rinnai.com.cn 与您分享了内部文件。',
+        ceo_message: '组织架构优化调整方案已发布，请登录查看您所在部门的调整方案。',
+        invoice_notice: '您的差旅报销申请已进入终审阶段，请登录财务系统核对明细。',
+        meeting_invite: '2026年度战略规划会议将于5月15日召开，请确认参会资格。',
+        security_compliance: '年度信息安全合规自查已开启，请于5月20日前完成自查。'
+    };
+    const btns = {
+        hr_bonus: '进入员工自助平台', it_maintenance: '验证邮箱账户', shared_document: '查看文件',
+        ceo_message: '查看组织架构调整方案', invoice_notice: '进入财务报销系统', meeting_invite: '确认参会 & 查看议程', security_compliance: '立即开始合规自查'
+    };
+    const preview = document.getElementById('email-preview');
+    preview.innerHTML = `<div style="background:#fff;border:2px solid ${colors[tpl]};border-radius:4px;overflow:hidden;">
+        <div style="background:${colors[tpl]};color:#fff;padding:10px 16px;font-size:13px;font-weight:600;">📧 ${names[tpl]}</div>
+        <div style="padding:16px;font-size:13px;color:#333;line-height:1.8;">
+            <p>{{target_email}}，您好：</p>
+            <p>${bodies[tpl] || ''}</p>
+            <div style="text-align:center;margin:16px 0;">
+                <span style="display:inline-block;background:${colors[tpl]};color:#fff;padding:10px 32px;border-radius:4px;font-weight:bold;font-size:14px;">${btns[tpl] || ''}</span>
+            </div>
+            <p style="font-size:11px;color:#999;text-align:center;">上海林内有限公司 · 版权所有</p>
+        </div>
+    </div>`;
+}
+
+function previewWarningTemplate() {
+    const tpl = document.getElementById('cfg-warning-template').value;
+    document.getElementById('warning-preview').innerHTML =
+        `<iframe src="/admin/api/preview-warning/${tpl}"></iframe>`;
+}
+
+// ===== TEMPLATE TEXT EDITOR =====
+let currentTemplateType = 'email';
+let currentTemplateId = '';
+
+async function loadTemplateEditor(type, id) {
+    currentTemplateType = type;
+    currentTemplateId = id;
+    const data = await api(`/admin/api/template-text?type=${type}&id=${id}`);
+    if (!data) return;
+
+    document.getElementById('template-editor-card').style.display = '';
+    const typeNames = { email: {
+        hr_bonus:'HR年终绩效奖金', it_maintenance:'IT系统维护升级', shared_document:'内部文件分享',
+        ceo_message:'CEO组织架构调整', invoice_notice:'财务报销审核', meeting_invite:'战略会议邀请', security_compliance:'信息安全合规自查'
+    }, warning: {
+        cyberpunk:'暗黑科技风', corporate:'企业商务风', clean:'简洁清爽风',
+        minimal:'极简深色风', education:'教育引导风', tech:'终端黑客风'
+    }};
+    const names = typeNames[type] || {};
+    document.getElementById('editor-tpl-name').textContent = names[id] || id;
+
+    const labels = {
+        page_title: '页面标题', alert_title: '警示标题', alert_body: '警示正文', footer_info: '页脚信息',
+        company_name: '公司名称', department: '部门名称', title: '邮件标题', greeting: '称呼语',
+        body_text: '正文内容', button_text: '按钮文字', note_title: '提示标题', note_text: '提示内容'
+    };
+    const fields = type === 'email'
+        ? ['company_name','department','title','greeting','body_text','button_text','note_title','note_text','footer_info']
+        : ['page_title','alert_title','alert_body','footer_info'];
+
+    let html = '<div class="form-row">';
+    fields.forEach(f => {
+        html += `<div class="form-group"><label>${labels[f] || f}</label>`;
+        if (f === 'body_text' || f === 'alert_body' || f === 'note_text' || f === 'footer_info') {
+            html += `<textarea id="tpl-${f}" style="width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;font-family:inherit;resize:vertical;" rows="3">${(data[f] || '').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>`;
+        } else {
+            html += `<input type="text" id="tpl-${f}" value="${(data[f] || '').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}" style="width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;font-family:inherit;">`;
+        }
+        html += '</div>';
+    });
+    html += '</div>';
+    document.getElementById('template-editor-body').innerHTML = html;
+}
+
+async function saveTemplateText() {
+    const fields = {};
+    const inputs = document.querySelectorAll('#template-editor-body input, #template-editor-body textarea');
+    inputs.forEach(el => {
+        const name = el.id.replace('tpl-', '');
+        fields[name] = el.value;
+    });
+    const data = await api('/admin/api/template-text', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({type: currentTemplateType, id: currentTemplateId, fields: fields})
+    });
+    if (data && data.status === 'ok') {
+        showToast('模板文本已保存', 'success');
+    }
+}
+
+async function resetTemplateText() {
+    if (!confirm('确定恢复为默认文本？当前编辑内容将丢失。')) return;
+    const data = await api('/admin/api/template-text/reset', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({type: currentTemplateType, id: currentTemplateId})
+    });
+    if (data && data.status === 'ok') {
+        showToast('已恢复为默认文本', 'success');
+        loadTemplateEditor(currentTemplateType, currentTemplateId);
+    }
+}
+
+// ===== SEND =====
+async function refreshTargetList() {
+    const data = await api('/admin/api/targets');
+    if (!data) return;
+    document.getElementById('target-count').textContent = data.count;
+    const tbody = document.getElementById('target-table');
+    if (data.emails.length === 0) {
+        tbody.innerHTML = '<tr><td style="color:#c0392b;">未找到 maillist.xlsx，请确保文件在程序同目录下。</td></tr>';
+    } else {
+        tbody.innerHTML = data.emails.map((e, i) =>
+            `<tr><td style="width:40px;color:#888;">${i+1}</td><td>${e}</td></tr>`).join('');
+    }
+}
+
+let sseSource = null;
+async function startCampaign() {
+    const btn = document.getElementById('btn-send');
+    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 发送中...';
+    document.getElementById('btn-stop').style.display = 'inline-block';
+    document.getElementById('send-log').style.display = 'block';
+    document.getElementById('send-log').textContent = '';
+
+    try {
+        const resp = await fetch('/admin/api/campaign/start', { method: 'POST' });
+        const reader = resp.body.getReader();
+        const decoder = new TextDecoder();
+        const logBox = document.getElementById('send-log');
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            const text = decoder.decode(value, { stream: true });
+            const lines = text.split('\n').filter(l => l.trim());
+            for (const line of lines) {
+                try {
+                    const evt = JSON.parse(line);
+                    if (evt.done) {
+                        logBox.innerHTML += `<span class="log-info">[完成]</span> ${evt.done}\n`;
+                        btn.disabled = false;
+                        btn.innerHTML = '<i class="fas fa-paper-plane"></i> 开始发送';
+                        document.getElementById('btn-stop').style.display = 'none';
+                        showToast('发送完成', 'success');
+                    } else if (evt.error) {
+                        logBox.innerHTML += `<span class="log-error">[错误]</span> ${evt.error}\n`;
+                    } else if (evt.ok) {
+                        logBox.innerHTML += `<span class="log-info">[成功]</span> ${evt.ok}\n`;
+                    } else if (evt.info) {
+                        logBox.innerHTML += `${evt.info}\n`;
+                    }
+                } catch {}
+            }
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+    } catch(e) {
+        document.getElementById('send-log').innerHTML += `<span class="log-error">连接失败: ${e.message}</span>\n`;
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> 开始发送';
+    document.getElementById('btn-stop').style.display = 'none';
+}
+
+function stopCampaign() {
+    fetch('/admin/api/campaign/stop', { method: 'POST' });
+    showToast('正在停止...', 'error');
+}
+
+// ===== HISTORY =====
+async function refreshHistory() {
+    const stats = await api('/admin/api/overall-stats');
+    if (stats) {
+        document.getElementById('stat-campaigns').textContent = stats.total_campaigns;
+        document.getElementById('stat-targets').textContent = stats.total_targets;
+        document.getElementById('stat-clicks').textContent = stats.total_clicks;
+        document.getElementById('stat-rate').textContent = stats.overall_click_rate + '%';
+    }
+    const campaigns = await api('/admin/api/campaigns');
+    if (campaigns) {
+        const tbl = document.getElementById('campaigns-table');
+        if (campaigns.length === 0) {
+            tbl.innerHTML = '<tr><td style="color:#888;">暂无活动记录</td></tr>';
+        } else {
+            tbl.innerHTML = `<tr><th>ID</th><th>活动名称</th><th>邮件主题</th><th>模板</th><th>目标数</th><th>点击数</th><th>点击率</th><th>创建时间</th><th>状态</th><th>操作</th></tr>` +
+                campaigns.map(c => {
+                    const targets = c.target_list ? c.target_list.split(',').length : 0;
+                    const clicks = c.click_count || 0;
+                    const rate = targets > 0 ? (clicks / targets * 100).toFixed(1) : 0;
+                    const tplNames = { hr_bonus: 'HR奖金', it_maintenance: 'IT维护', shared_document: '文件分享' };
+                    return `<tr>
+                        <td>${c.id}</td><td>${c.name}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.subject}</td>
+                        <td>${tplNames[c.template] || c.template}</td><td>${targets}</td><td>${clicks}</td>
+                        <td><span class="badge ${rate > 30 ? 'badge-red' : rate > 10 ? 'badge-yellow' : 'badge-green'}">${rate}%</span></td>
+                        <td>${c.created_at}</td>
+                        <td><span class="badge ${c.status === 'active' ? 'badge-green' : 'badge-red'}">${c.status === 'active' ? '运行中' : '已关闭'}</span></td>
+                        <td><button class="btn btn-gray btn-sm" onclick="viewCampaignDetail(${c.id})">详情</button></td>
+                    </tr>`;
+                }).join('');
+        }
+    }
+    // Update victim filter dropdown
+    if (campaigns && campaigns.length > 0) {
+        document.getElementById('victim-filter').innerHTML = '<option value="">全部活动</option>' +
+            campaigns.map(c => `<option value="${c.id}">#${c.id} ${c.name}</option>`).join('');
+    }
+}
+
+async function viewCampaignDetail(cid) {
+    document.querySelectorAll('.sidebar nav a').forEach(x => x.classList.remove('active'));
+    document.querySelector('.sidebar nav a[data-page="history"]').classList.add('active');
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-history').classList.add('active');
+    document.getElementById('page-title').textContent = '历史数据';
+
+    document.querySelectorAll('#history-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('#history-tabs .tab-btn[data-tab="tab-victims"]').classList.add('active');
+    document.querySelectorAll('#page-history .tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-victims').classList.add('active');
+
+    document.getElementById('victim-filter').value = cid;
+    loadVictims();
+    refreshHistory();
+}
+
+async function loadVictims() {
+    const cid = document.getElementById('victim-filter').value;
+    const url = cid ? `/admin/api/victims?campaign_id=${cid}` : '/admin/api/victims';
+    const victims = await api(url);
+    const tbl = document.getElementById('victims-table');
+    if (!victims || victims.length === 0) {
+        tbl.innerHTML = '<tr><td style="color:#888;">暂无数据</td></tr>';
+    } else {
+        tbl.innerHTML = `<tr><th>邮箱</th><th>活动</th><th>点击时间</th><th>浏览器</th><th>平台</th><th>IP</th></tr>` +
+            victims.map(v => `<tr>
+                <td>${v.target_email}</td><td>${v.campaign_name || '-'}</td>
+                <td>${v.click_time}</td><td>${v.browser || '-'}</td><td>${v.platform || '-'}</td>
+                <td>${v.ip_address || '-'}</td>
+            </tr>`).join('');
+    }
+}
+
+async function loadRepeatVictims() {
+    const data = await api('/admin/api/repeat-victims');
+    const tbl = document.getElementById('repeat-table');
+    if (!data || data.length === 0) {
+        tbl.innerHTML = '<tr><td style="color:#888;">暂无重复中招用户 ✓</td></tr>';
+    } else {
+        tbl.innerHTML = `<tr><th>邮箱</th><th>中招次数</th><th>涉及活动ID</th><th>最近一次点击</th></tr>` +
+            data.map(r => `<tr>
+                <td><strong style="color:#dc2626;">${r.target_email}</strong></td>
+                <td><span class="badge badge-red">${r.click_count} 次</span></td>
+                <td>${r.campaign_ids}</td><td>${r.last_click}</td>
+            </tr>`).join('');
+    }
+}
+
+// ===== AUTH CHECK =====
+async function checkLogin() {
+    const data = await api('/admin/api/session');
+    if (!data || !data.logged_in) {
+        window.location.href = '/admin/login';
+        return;
+    }
+    document.getElementById('login-user').textContent = data.username || '-';
+}
+checkLogin();
+
+// ===== USER MANAGEMENT =====
+async function loadAdmins() {
+    const data = await api('/admin/api/admins');
+    const tbl = document.getElementById('admins-table');
+    if (!data || data.length === 0) {
+        tbl.innerHTML = '<tr><td style="color:#888;">加载失败</td></tr>';
+        return;
+    }
+    tbl.innerHTML = '<tr><th>ID</th><th>用户名</th><th>创建时间</th><th>操作</th></tr>' +
+        data.map(a => '<tr><td>' + a.id + '</td><td><strong>' + a.username + '</strong></td><td>' + a.created_at + '</td>' +
+            '<td><button class="btn btn-red btn-sm" onclick="deleteAdmin(' + a.id + ', \'' + a.username + '\')">删除</button></td></tr>').join('');
+}
+async function addAdmin() {
+    const u = document.getElementById('new-admin-user').value.trim();
+    const p = document.getElementById('new-admin-pass').value;
+    if (!u || !p) { showToast('用户名和密码不能为空', 'error'); return; }
+    const data = await api('/admin/api/admins', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username: u, password: p})
+    });
+    if (data && data.status === 'ok') {
+        showToast('管理员已添加', 'success');
+        document.getElementById('new-admin-user').value = '';
+        document.getElementById('new-admin-pass').value = '';
+        loadAdmins();
+    } else {
+        showToast((data && data.msg) || '添加失败', 'error');
+    }
+}
+async function deleteAdmin(id, name) {
+    if (!confirm('确定删除管理员 "' + name + '" 吗？')) return;
+    const res = await fetch('/admin/api/admins/' + id, { method: 'DELETE' });
+    const data = await res.json();
+    if (data && data.status === 'ok') {
+        showToast('管理员已删除', 'success');
+        loadAdmins();
+    } else {
+        showToast((data && data.msg) || '删除失败', 'error');
+    }
+}
+
+// ===== INIT =====
+loadConfig();
+</script>
+</body>
+</html>

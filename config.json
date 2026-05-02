@@ -1,0 +1,13 @@
+{
+  "smtp_server": "192.168.0.83",
+  "smtp_port": 25,
+  "sender_email": "hr@shrinnai.com",
+  "sender_password": "Rinnai@2025!",
+  "base_url": "http://yuangongzhijia.rinnai.com.cn:5000",
+  "email_template": "shared_document",
+  "warning_template": "cyberpunk",
+  "campaign_name": "2026年度安全意识培训",
+  "email_subject": "【HR通知】关于2026年度绩效奖金确认的通知",
+  "server_host": "0.0.0.0",
+  "server_port": 5000
+}

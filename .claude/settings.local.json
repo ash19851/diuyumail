@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip list *)",
+      "Bash(pyinstaller --onefile --console --add-data \"static;static\" --hidden-import openpyxl --name \"PhishingTraining\" --distpath ./dist --workpath ./build --specpath ./build main.py)",
+      "Bash(rm -rf build dist)",
+      "Bash(pyinstaller --onefile --console --add-data \"d:/pythontest/diaoyumail/static;static\" --hidden-import openpyxl --name \"PhishingTraining\" main.py)",
+      "Bash(rm -rf build dist *.spec)",
+      "Bash(pyinstaller --onefile --console --add-data \"d:/pythontest/diaoyumail/static;static\" --name \"PhishingTraining\" main.py)",
+      "Bash(echo \"EXIT_CODE=$?\")",
+      "Bash(pyinstaller --onefile --console --add-data \"d:/pythontest/diaoyumail/static;static\" --name \"PhishingTraining\" --exclude-module scipy --exclude-module matplotlib --exclude-module IPython --exclude-module pygame --exclude-module PIL --exclude-module tkinter --exclude-module PyQt5 --exclude-module PySide2 --exclude-module PySide6 --exclude-module sphinx --exclude-module pytest --exclude-module setuptools --exclude-module pip main.py)",
+      "Bash(cp -r \"d:/pythontest/diaoyumail\" \"d:/pythontest/diaoyumail_backup_20260427\")",
+      "Read(//d/pythontest/**)",
+      "Bash(pyinstaller --onedir --console --add-data \"d:/pythontest/diaoyumail/static;static\" --name \"PhishingTraining\" --exclude-module scipy --exclude-module matplotlib --exclude-module IPython --exclude-module pygame --exclude-module PIL --exclude-module tkinter --exclude-module numba --exclude-module llvmlite main.py)",
+      "Bash(python -c ' *)",
+      "Bash(zip -r ../PhishingTraining_2026.zip .)",
+      "Bash(python -c \"import shutil; shutil.make_archive\\('d:/pythontest/diaoyumail/dist/PhishingTraining_2026', 'zip', 'd:/pythontest/diaoyumail/dist/release'\\)\")",
+      "Bash(python -c \"import shutil; shutil.make_archive\\('d:/pythontest/diaoyumail/dist/PhishingTraining_2026_v2', 'zip', 'd:/pythontest/diaoyumail/dist/release'\\)\")",
+      "Bash(pyinstaller --onedir --name PhishingTrainer --add-data \"static;static\" --add-data \"templates.py;.\" --add-data \"dataconfig.py;.\" --add-data \"config_manager.py;.\" --add-data \"email_sender.py;.\" --add-data \"getmiallist.py;.\" --exclude-module scipy --exclude-module matplotlib --exclude-module IPython --exclude-module pygame --exclude-module numpy --exclude-module pandas --clean --noconfirm main.py)",
+      "Bash(python -m PyInstaller PhishingTrainer.spec)",
+      "Bash(python tracker_server.py)",
+      "Bash(curl -s \"http://127.0.0.1:5000/admin/api/template-text?type=email&id=hr_bonus\")",
+      "Bash(curl -s -c /tmp/cookies.txt -X POST \"http://127.0.0.1:5000/admin/login\" -H \"Content-Type: application/json\" -d '{\"username\":\"admin\",\"password\":\"admin\"}')",
+      "Bash(curl -s -b /tmp/cookies.txt \"http://127.0.0.1:5000/admin/api/template-text?type=email&id=hr_bonus\")",
+      "Bash(curl -s -b /tmp/cookies.txt \"http://127.0.0.1:5000/admin/api/preview-warning/tech\")",
+      "Bash(pkill -f \"python tracker_server.py\")",
+      "Bash(python -m PyInstaller PhishingTrainer.spec --clean --noconfirm)",
+      "Bash(python -m PyInstaller PhishingTrainer.spec --noconfirm)",
+      "Bash(python -c \"import openpyxl; print\\('openpyxl version:', openpyxl.__version__\\)\")",
+      "Bash(python -c \"from getmiallist import read_all_rows_specific_sheet; print\\('import OK'\\)\")"
+    ]
+  }
+}

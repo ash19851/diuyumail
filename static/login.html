@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登录 — 钓鱼培训管理平台</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    background: #111827;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    overflow: hidden;
+}
+.login-header {
+    background: #111827;
+    padding: 32px 28px;
+    text-align: center;
+    color: #fff;
+}
+.login-header .icon {
+    font-size: 32px;
+    color: #f59e0b;
+    margin-bottom: 10px;
+}
+.login-header h1 {
+    font-size: 20px;
+    font-weight: 600;
+}
+.login-header p {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 4px;
+}
+.login-body {
+    padding: 28px;
+}
+.form-group {
+    margin-bottom: 16px;
+}
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+}
+.form-group input:focus {
+    outline: none;
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 3px rgba(245,158,11,0.1);
+}
+.btn-login {
+    width: 100%;
+    padding: 11px;
+    background: #f59e0b;
+    color: #111;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+    margin-top: 4px;
+}
+.btn-login:hover { background: #d97706; }
+.btn-login:disabled { opacity: 0.6; cursor: not-allowed; }
+.error-msg {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-bottom: 14px;
+    display: none;
+}
+.error-msg.show { display: block; }
+.login-footer {
+    text-align: center;
+    padding: 0 28px 24px;
+    font-size: 11px;
+    color: #9ca3af;
+}
+</style>
+</head>
+<body>
+<div class="login-card">
+    <div class="login-header">
+        <div class="icon"><i class="fas fa-shield-haltered"></i></div>
+        <h1>钓鱼培训管理平台</h1>
+        <p>上海林内有限公司 · IT室</p>
+    </div>
+    <div class="login-body">
+        <div class="error-msg" id="error-msg"></div>
+        <form id="login-form" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>用户名</label>
+                <input type="text" id="username" placeholder="请输入管理员用户名" autocomplete="username" required autofocus>
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="password" placeholder="请输入密码" autocomplete="current-password" required>
+            </div>
+            <button type="submit" class="btn-login" id="btn-login">
+                <i class="fas fa-sign-in-alt"></i> 登录
+            </button>
+        </form>
+    </div>
+    <div class="login-footer">
+        <p>默认管理员: admin / admin &nbsp;|&nbsp; 首次登录后请修改密码</p>
+    </div>
+</div>
+
+<script>
+async function handleLogin(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-login');
+    const err = document.getElementById('error-msg');
+    err.classList.remove('show');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 验证中...';
+
+    try {
+        const res = await fetch('/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            })
+        });
+        const data = await res.json();
+        if (data.status === 'ok') {
+            window.location.href = '/admin';
+        } else {
+            err.textContent = data.msg || '登录失败';
+            err.classList.add('show');
+        }
+    } catch(ex) {
+        err.textContent = '网络错误，请重试';
+        err.classList.add('show');
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> 登录';
+}
+</script>
+</body>
+</html>

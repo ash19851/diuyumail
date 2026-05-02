@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全意识教育培训 — 上海林内</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', Tahoma, sans-serif;
+            background: #fefefe; min-height: 100vh;
+            display: flex; justify-content: center; align-items: flex-start;
+            padding: 20px; color: #333; line-height: 1.7;
+        }
+        .container { max-width: 800px; width: 100%; padding: 20px 0 60px; }
+        .hero-card {
+            background: #fff; border-radius: 16px; box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            overflow: hidden; border: 1px solid #eee; margin-bottom: 20px;
+        }
+        .hero-top {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            padding: 36px 32px 28px; text-align: center; color: #fff;
+        }
+        .hero-top .icon { font-size: 48px; margin-bottom: 12px; }
+        .hero-top h1 { font-size: 24px; font-weight: 700; }
+        .hero-top .byline { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+        .hero-body { padding: 28px 32px; }
+        .hero-body .msg {
+            background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px;
+            padding: 16px 20px; font-size: 14px; color: #991b1b; margin-bottom: 24px;
+        }
+        .hero-body .msg strong { color: #dc2626; }
+        .learn-cards {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+            margin-bottom: 24px;
+        }
+        .learn-card {
+            background: #fafbfc; border: 1px solid #eee; border-radius: 12px;
+            padding: 20px 18px; transition: all 0.25s; cursor: default;
+        }
+        .learn-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); border-color: #d1d5db; }
+        .learn-card .lc-icon { font-size: 30px; margin-bottom: 10px; display: block; }
+        .learn-card h4 { font-size: 14px; color: #1f2937; margin-bottom: 4px; }
+        .learn-card p { font-size: 12px; color: #6b7280; line-height: 1.6; }
+        .step-strip {
+            display: flex; gap: 12px; margin-bottom: 24px;
+        }
+        .step-item {
+            flex: 1; text-align: center; padding: 18px 12px;
+            background: #f9fafb; border-radius: 10px; border: 1px solid #eee;
+        }
+        .step-item .step-circle {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: #2563eb; color: #fff; display: inline-flex;
+            align-items: center; justify-content: center; font-weight: 700; font-size: 15px;
+            margin-bottom: 8px;
+        }
+        .step-item h4 { font-size: 13px; color: #1f2937; margin-bottom: 2px; }
+        .step-item p { font-size: 11px; color: #888; }
+        .quiz-card {
+            background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px;
+            padding: 20px 24px; margin-top: 20px;
+        }
+        .quiz-card h3 { font-size: 15px; color: #0369a1; margin-bottom: 10px; }
+        .quiz-card .q-opt { display: flex; gap: 8px; flex-wrap: wrap; }
+        .quiz-card .q-btn {
+            padding: 7px 18px; border: 1px solid #bae6fd; border-radius: 20px;
+            background: #fff; color: #0369a1; cursor: pointer; font-size: 12px; transition: all 0.2s;
+        }
+        .quiz-card .q-btn:hover { background: #e0f2fe; }
+        .quiz-card .q-btn.chosen { background: #fecaca; border-color: #fca5a5; color: #991b1b; }
+        .quiz-card .q-btn.correct { background: #bbf7d0; border-color: #86efac; color: #166534; }
+        .quiz-card .feedback { font-size: 12px; padding: 10px; border-radius: 6px; margin-top: 8px; display: none; }
+        .quiz-card .feedback.show { display: block; }
+        .quiz-card .feedback.wrong { background: #fef2f2; color: #991b1b; }
+        .quiz-card .feedback.right { background: #f0fdf4; color: #166534; }
+        .cta-banner {
+            background: #111827; border-radius: 12px; padding: 24px 28px;
+            text-align: center; color: #fff; margin-top: 20px;
+        }
+        .cta-banner p { font-size: 13px; margin-bottom: 10px; color: #d1d5db; }
+        .btn-white {
+            display: inline-block; padding: 10px 28px; background: #fff; color: #111827;
+            border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 13px;
+            transition: all 0.2s;
+        }
+        .btn-white:hover { background: #e5e7eb; transform: translateY(-2px); }
+        @media (max-width: 640px) { .learn-cards { grid-template-columns: 1fr; } .step-strip { flex-direction: column; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero-card">
+        <div class="hero-top">
+            <div class="icon">🎣</div>
+            <h1>模拟钓鱼测试 — 您中招了</h1>
+            <p class="byline">上海林内有限公司 · IT室 · 信息安全组</p>
+        </div>
+        <div class="hero-body">
+            <div class="msg">
+                <strong>&#128276; 这是一次内部安全培训测试。</strong> 您刚刚点击了一封模拟钓鱼邮件中的链接。别担心，这不是真实的攻击——但如果这是真的，您的账户信息可能已经泄露。请花几分钟时间阅读下方的安全教育内容。
+            </div>
+            <h3 style="font-size:16px;color:#1f2937;margin-bottom:14px;">&#128218; 您需要了解的真实钓鱼攻击类型</h3>
+            <div class="learn-cards">
+                <div class="learn-card">
+                    <span class="lc-icon">🎯</span>
+                    <h4>鱼叉式钓鱼（Spear Phishing）</h4>
+                    <p>针对特定个人或部门的精准攻击。攻击者会研究目标的工作职责、社交关系，伪装成同事或合作伙伴发送定制化的钓鱼邮件。</p>
+                </div>
+                <div class="learn-card">
+                    <span class="lc-icon">👑</span>
+                    <h4>鲸钓攻击（Whaling）</h4>
+                    <p>专门针对高管和决策者的高级攻击。邮件伪装为法律传票、监管通知或董事会文件，利用权威性迫使目标快速响应。</p>
+                </div>
+                <div class="learn-card">
+                    <span class="lc-icon">💼</span>
+                    <h4>商业邮件欺诈（BEC）</h4>
+                    <p>攻击者冒充CEO或供应商，要求财务人员紧急转账。FBI数据显示BEC造成的损失已超过勒索软件攻击。</p>
+                </div>
+                <div class="learn-card">
+                    <span class="lc-icon">📱</span>
+                    <h4>二维码钓鱼（Quishing）</h4>
+                    <p>将钓鱼链接嵌入二维码，诱导用户使用手机扫描。手机安全防护通常弱于PC，且扫码时无法预览链接地址。</p>
+                </div>
+            </div>
+            <h3 style="font-size:16px;color:#1f2937;margin-bottom:14px;">✅ 收到可疑邮件时的正确做法</h3>
+            <div class="step-strip">
+                <div class="step-item">
+                    <div class="step-circle">1</div>
+                    <h4>停下来</h4>
+                    <p>不要点击任何链接或下载附件</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">2</div>
+                    <h4>仔细看</h4>
+                    <p>检查发件人地址、链接URL、邮件格式</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">3</div>
+                    <h4>单独确认</h4>
+                    <p>通过电话/企业微信向发件人核实</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">4</div>
+                    <h4>报告IT</h4>
+                    <p>转发可疑邮件至IT@rinnai.com.cn</p>
+                </div>
+            </div>
+            <div class="quiz-card" id="quiz-card">
+                <h3>🧠 小测验：收到一封来自"HR"的紧急邮件，要求你点击链接查看年终奖金明细。你应该？</h3>
+                <div class="q-opt">
+                    <button class="q-btn" data-answer="wrong">立即点击查看</button>
+                    <button class="q-btn" data-answer="wrong">先点一下看看真假</button>
+                    <button class="q-btn" data-answer="correct">通过企业微信向HR部门确认</button>
+                    <button class="q-btn" data-answer="wrong">转发给同事让他们先试试</button>
+                </div>
+                <div class="feedback" id="quiz-feedback"></div>
+            </div>
+        </div>
+    </div>
+    <div class="cta-banner">
+        <p style="margin-bottom:4px;font-size:14px;font-weight:600;color:#fff;">安全不是额外的负担，而是每个人工作的一部分</p>
+        <p>学习更多安全知识，下次面对真实攻击时做出正确的判断</p>
+        <a href="https://rinnaichina.sharepoint.com/sites/m365" class="btn-white">访问安全知识库</a>
+    </div>
+</div>
+<script>
+document.querySelectorAll('.q-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const allBtns = this.parentElement.querySelectorAll('.q-btn');
+        allBtns.forEach(b => { b.classList.remove('chosen','correct'); b.disabled = true; });
+        const fb = document.getElementById('quiz-feedback');
+        if (this.dataset.answer === 'correct') {
+            this.classList.add('correct');
+            fb.className = 'feedback right show';
+            fb.textContent = '✅ 正确！任何涉及个人利益变动的通知，都应通过独立渠道确认，而不是仅凭邮件。';
+        } else {
+            this.classList.add('chosen');
+            fb.className = 'feedback wrong show';
+            fb.textContent = '❌ 这不是安全的做法。钓鱼邮件的目的是让你冲动点击。正确做法：通过企业微信、电话、当面确认。';
+            this.parentElement.querySelectorAll('[data-answer="correct"]').forEach(b => b.classList.add('correct'));
+        }
+    });
+});
+</script>
+</body>
+</html>

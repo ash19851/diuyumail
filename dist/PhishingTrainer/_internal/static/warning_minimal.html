@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全培训通知 — 上海林内</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', Tahoma, sans-serif;
+            background: #1a1d23;
+            min-height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            padding: 20px; color: #d4d4d8; line-height: 1.8;
+        }
+        .container {
+            max-width: 720px; width: 100%;
+            background: #23262f; border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            overflow: hidden; border: 1px solid #2d3039;
+        }
+        .header {
+            padding: 40px 32px; text-align: center;
+            border-bottom: 1px solid #2d3039; position: relative;
+        }
+        .header .icon-ring {
+            width: 64px; height: 64px; margin: 0 auto 16px;
+            border-radius: 50%; background: rgba(239,68,68,0.1);
+            border: 2px solid rgba(239,68,68,0.25);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; color: #ef4444;
+        }
+        .header h1 { font-size: 20px; font-weight: 600; color: #f0f0f0; }
+        .header .sub { font-size: 12px; color: #6b7280; margin-top: 4px; }
+        .content { padding: 28px 32px; }
+        .alert {
+            background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
+            border-left: 3px solid #ef4444; border-radius: 0 6px 6px 0;
+            padding: 18px 20px; margin-bottom: 28px;
+        }
+        .alert h2 { font-size: 15px; color: #fca5a5; margin-bottom: 6px; }
+        .alert p { font-size: 13px; color: #d4d4d8; }
+        .section { margin-bottom: 24px; }
+        .section h3 { font-size: 15px; color: #f0f0f0; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .section h3 .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+        .dot.red { background: #ef4444; } .dot.amber { background: #f59e0b; } .dot.blue { background: #3b82f6; } .dot.green { background: #22c55e; }
+        .tip-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .tip-list li {
+            padding: 12px 14px; font-size: 12px; color: #a1a1aa;
+            background: #1e2028; border-radius: 6px; border-left: 3px solid #2d3039;
+            transition: all 0.2s;
+        }
+        .tip-list li:hover { border-left-color: #ef4444; color: #d4d4d8; background: #1a1c22; }
+        .flag-box {
+            background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.15);
+            border-radius: 8px; padding: 18px 20px;
+        }
+        .flag-box h4 { font-size: 13px; color: #fbbf24; margin-bottom: 10px; }
+        .flag-box ul { padding-left: 18px; }
+        .flag-box li { font-size: 12px; color: #a1a1aa; margin-bottom: 4px; }
+        .footer {
+            padding: 16px 32px; border-top: 1px solid #2d3039;
+            text-align: center; font-size: 11px; color: #6b7280;
+        }
+        .btn {
+            display: inline-block; padding: 10px 24px; border-radius: 6px;
+            text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.2s;
+        }
+        .btn-red { background: #ef4444; color: #fff; }
+        .btn-red:hover { background: #dc2626; }
+        .btn-ghost { background: transparent; color: #a1a1aa; border: 1px solid #2d3039; margin-left: 8px; }
+        .btn-ghost:hover { border-color: #52525b; color: #d4d4d8; }
+        @media (max-width: 600px) { .tip-list { grid-template-columns: 1fr; } .content { padding: 20px 18px; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="icon-ring"><i class="fas fa-shield-haltered"></i></div>
+        <h1>安全意识培训通知</h1>
+        <p class="sub">上海林内有限公司 · IT室</p>
+    </div>
+    <div class="content">
+        <div class="alert">
+            <h2><i class="fas fa-exclamation-triangle"></i> 您刚刚点击了一封模拟钓鱼邮件</h2>
+            <p>这是一次由公司IT室组织的内部安全意识培训测试，<strong style="color:#f0f0f0;">您并未受到真正的攻击</strong>。但请反思：如果在真实场景中，您的账户信息可能已经泄露。</p>
+        </div>
+        <div class="section">
+            <h3><span class="dot red"></span> 识别钓鱼邮件的关键信号</h3>
+            <ul class="tip-list">
+                <li><strong style="color:#f0f0f0;">核对发件人地址</strong><br>不只看显示名称，仔细检查完整邮箱域名。内部邮件均来自 @rinnai.com.cn。</li>
+                <li><strong style="color:#f0f0f0;">悬停检查链接</strong><br>鼠标悬停查看实际跳转地址。警惕短链接和拼写近似的域名。</li>
+                <li><strong style="color:#f0f0f0;">警惕紧急语气</strong><br>"请立即"、"逾期将终止"——攻击者利用紧迫感让你来不及判断。</li>
+                <li><strong style="color:#f0f0f0;">慎重点击附件</strong><br>.exe、.zip、带宏的Office文档均可携带恶意代码。</li>
+                <li><strong style="color:#f0f0f0;">留意语言和格式</strong><br>语法错误、异常排版往往是攻击者匆忙制作的痕迹。</li>
+                <li><strong style="color:#f0f0f0;">索要敏感信息</strong><br>正规机构绝不会通过邮件索要密码、验证码等敏感信息。</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h3><span class="dot amber"></span> 本次模拟邮件的可疑之处</h3>
+            <div class="flag-box">
+                <h4>如果您仔细检查，会发现以下红旗信号：</h4>
+                <ul>
+                    <li>链接指向外部域名，非公司内部系统地址</li>
+                    <li>链接域名与发件人域名不一致</li>
+                    <li>未通过企业微信/Teams等内部渠道同步通知</li>
+                    <li>点击后的登录页并非公司统一认证平台（SSO）</li>
+                    <li>页面未要求多因素认证（MFA）</li>
+                    <li>邮件紧迫性措辞不符合公司内部沟通惯例</li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:20px;">
+            <a href="https://rinnaichina.sharepoint.com/sites/m365" class="btn btn-red">了解更多安全知识</a>
+            <a href="https://rinnaichina.sharepoint.com/sites/m365" class="btn btn-ghost">访问安全知识库</a>
+        </div>
+    </div>
+    <div class="footer">
+        <p>IT室 · 信息安全组 | 上海林内有限公司 | 报告可疑邮件：IT@rinnai.com.cn</p>
+    </div>
+</div>
+</body>
+</html>

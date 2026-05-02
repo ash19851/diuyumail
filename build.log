@@ -1,0 +1,97 @@
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+323 INFO: PyInstaller: 6.11.1, contrib hooks: 2024.11
+324 INFO: Python: 3.12.0
+358 INFO: Platform: Windows-11-10.0.26200-SP0
+359 INFO: Python environment: C:\Users\unang\AppData\Local\Programs\Python\Python312
+359 INFO: wrote D:\pythontest\diaoyumail\PhishingTraining.spec
+365 INFO: Module search paths (PYTHONPATH):
+['C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\pyinstaller.exe',
+ 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\python312.zip',
+ 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\DLLs',
+ 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib',
+ 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312',
+ 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages',
+ 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\win32',
+ 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\win32\\lib',
+ 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\Pythonwin',
+ 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\setuptools\\_vendor',
+ 'D:\\pythontest\\diaoyumail']
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+pygame 2.6.1 (SDL 2.28.4, Python 3.12.0)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+4369 INFO: Appending 'datas' from .spec
+4369 INFO: checking Analysis
+4369 INFO: Building Analysis because Analysis-00.toc is non existent
+4369 INFO: Running Analysis Analysis-00.toc
+4369 INFO: Target bytecode optimization level: 0
+4369 INFO: Initializing module dependency graph...
+4369 INFO: Initializing module graph hook caches...
+4458 INFO: Analyzing base_library.zip ...
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+5950 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+8396 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+10424 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+13196 INFO: Caching module dependency graph...
+13277 INFO: Looking for Python shared library...
+13283 INFO: Using Python shared library: C:\Users\unang\AppData\Local\Programs\Python\Python312\python312.dll
+13284 INFO: Analyzing D:\pythontest\diaoyumail\main.py
+13474 INFO: Processing standard module hook 'hook-sqlite3.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+14543 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+14544 INFO: SetuptoolsInfo: initializing cached setuptools info...
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+18871 INFO: Processing standard module hook 'hook-cryptography.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+21382 INFO: Processing standard module hook 'hook-platform.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+21507 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+21671 INFO: Processing standard module hook 'hook-xml.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+22363 INFO: Processing standard module hook 'hook-sysconfig.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+23113 INFO: Processing standard module hook 'hook-difflib.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+23667 INFO: Processing standard module hook 'hook-jinja2.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+25887 INFO: Processing pre-safe-import-module hook 'hook-importlib_metadata.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+25887 INFO: Setuptools: 'importlib_metadata' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.importlib_metadata'!
+25939 INFO: Processing standard module hook 'hook-pandas.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+28453 INFO: Processing standard module hook 'hook-numpy.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+44433 INFO: Processing standard module hook 'hook-psutil.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+47528 INFO: Processing standard module hook 'hook-pytz.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+47892 INFO: Processing standard module hook 'hook-pkg_resources.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+48290 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+48308 INFO: Processing standard module hook 'hook-packaging.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+48566 INFO: Processing pre-safe-import-module hook 'hook-jaraco.text.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+48566 INFO: Setuptools: 'jaraco.text' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco.text'!
+48567 INFO: Processing pre-safe-import-module hook 'hook-platformdirs.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+48595 INFO: Processing standard module hook 'hook-platformdirs.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+51075 INFO: Processing standard module hook 'hook-numba.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+51174 INFO: Processing standard module hook 'hook-llvmlite.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+52555 INFO: Processing standard module hook 'hook-pygments.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\unang\AppData\Local\Programs\Python\Python312\Lib\site-packages\altgraph\__init__.py:142: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+54651 INFO: Processing standard module hook 'hook-pycparser.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+55258 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+61824 INFO: Processing pre-safe-import-module hook 'hook-win32com.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\pre_safe_import_module'
+61988 INFO: Processing standard module hook 'hook-win32com.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+62003 INFO: Processing standard module hook 'hook-pythoncom.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+62082 INFO: Processing standard module hook 'hook-pywintypes.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+65579 INFO: Processing standard module hook 'hook-pandas.io.formats.style.py' from 'C:\\Users\\unang\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyInstaller\\hooks'

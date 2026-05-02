@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURITY ALERT — 上海林内</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Consolas', 'Courier New', 'Microsoft YaHei', monospace;
+            background: #0c0d11; min-height: 100vh;
+            display: flex; justify-content: center; align-items: flex-start;
+            padding: 20px; color: #00e054; line-height: 1.7;
+        }
+        .container { max-width: 800px; width: 100%; margin-top: 30px; }
+        .terminal {
+            background: #12141c; border: 1px solid #1e2233; border-radius: 8px;
+            overflow: hidden; box-shadow: 0 0 60px rgba(0, 224, 84, 0.04);
+        }
+        .term-header {
+            background: #161a24; padding: 10px 16px; display: flex; align-items: center;
+            gap: 8px; border-bottom: 1px solid #1e2233;
+        }
+        .term-header .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .term-header .dot.red { background: #ff5f56; }
+        .term-header .dot.yellow { background: #ffbd2e; }
+        .term-header .dot.green { background: #27ca40; }
+        .term-header .title { margin-left: 12px; font-size: 12px; color: #5c6278; }
+        .term-body { padding: 20px 24px; font-size: 13px; }
+        .term-body .line { margin-bottom: 4px; }
+        .term-body .prompt { color: #00e054; }        .term-body .cmd { color: #88c8ff; }        .term-body .output { color: #9ea9c0; }        .term-body .warn { color: #ff6b6b; }        .term-body .highlight { color: #ffca5f; }        .term-body .info { color: #5dade2; }        .term-body .success { color: #2ecc71; }
+        .term-body .blink-cursor::after {
+            content: '\258C'; color: #00e054; animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+        .section-card {
+            background: #161a24; border: 1px solid #1e2233; border-radius: 6px;
+            padding: 16px 20px; margin: 14px 0;
+        }
+        .section-card h4 { color: #88c8ff; font-size: 13px; margin-bottom: 8px; }
+        .section-card ul { list-style: none; padding: 0; }
+        .section-card ul li { padding: 4px 0; font-size: 12px; color: #9ea9c0; }
+        .section-card ul li::before { content: '> '; color: #00e054; }
+        .json-block {
+            background: #0c0e14; border: 1px solid #1e2233; border-radius: 4px;
+            padding: 14px 18px; font-size: 12px; margin: 10px 0;
+            color: #ffca5f;
+        }
+        .json-block .key { color: #5dade2; }
+        .json-block .val { color: #f8f8f2; }
+        .json-block .val.danger { color: #ff6b6b; }
+        .btn-group { text-align: center; margin: 16px 0; }
+        .term-btn {
+            display: inline-block; padding: 10px 24px; border-radius: 4px;
+            text-decoration: none; font-family: inherit; font-size: 13px; transition: all 0.2s;
+        }
+        .btn-primary {
+            background: #00e054; color: #0c0d11; font-weight: 600;
+        }
+        .btn-primary:hover { background: #00c048; box-shadow: 0 0 16px rgba(0, 224, 84, 0.2); }
+        .btn-ghost {
+            background: transparent; color: #5dade2; border: 1px solid #1e2233; margin-left: 8px;
+        }
+        .btn-ghost:hover { border-color: #5dade2; color: #88c8ff; }
+        @media (max-width: 640px) { .term-body { padding: 16px; font-size: 12px; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="terminal">
+        <div class="term-header">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="title">RINNAI-SEC@terminal:~</span>
+        </div>
+        <div class="term-body">
+            <div class="line"><span class="prompt">sec-admin@rinnai:~$</span> <span class="cmd">./scan_phishing_event</span></div>
+            <div class="line"><span class="output">[INFO] 正在分析钓鱼邮件事件...</span></div>
+            <div class="line"><span class="output">[INFO] 链接来源: 模拟钓鱼邮件攻击演习</span></div>
+            <div class="line"><span class="output">[INFO] 发起单位: IT室 · 信息安全组</span></div>
+            <div class="line">&nbsp;</div>
+            <div class="line"><span class="prompt">sec-admin@rinnai:~$</span> <span class="cmd">./threat_report --format=json</span></div>
+            <div class="json-block">
+                <span class="key">"event_type"</span>: <span class="val">"SIMULATED_PHISHING_EXERCISE"</span>,<br>
+                <span class="key">"threat_level"</span>: <span class="val danger">"CRITICAL (in real scenario)"</span>,<br>
+                <span class="key">"user_action"</span>: <span class="val danger">"CLICKED_SUSPICIOUS_LINK"</span>,<br>
+                <span class="key">"potential_impact"</span>: <span class="val danger">"CREDENTIAL_THEFT | SESSION_HIJACK | DATA_BREACH"</span>
+            </div>
+            <div class="line"><span class="warn">[WARN] 您在本演习中未能识别钓鱼邮件！</span></div>
+            <div class="line"><span class="warn">[WARN] 在真实攻击中，您的账户和设备可能已遭受入侵。</span></div>
+            <div class="line">&nbsp;</div>
+        </div>
+    </div>
+
+    <div class="terminal" style="margin-top:16px;">
+        <div class="term-header">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="title">RINNAI-SEC@terminal:~/training</span>
+        </div>
+        <div class="term-body">
+            <div class="line"><span class="prompt">sec-admin@rinnai:~$</span> <span class="cmd">cat indicators_of_phishing.txt</span></div>
+            <div class="line">&nbsp;</div>
+            <div class="section-card">
+                <h4>[ 钓鱼邮件关键识别指标 ]</h4>
+                <ul>
+                    <li>发件人域名与声称的组织不一致</li>
+                    <li>链接指向非官方域名 / 使用短链接服务</li>
+                    <li>紧迫性措辞: "立即"、"逾期将终止"、"限时处理"</li>
+                    <li>索要密码、验证码、身份证号等敏感信息</li>
+                    <li>附件类型异常 (.exe、.zip、启用宏的文档)</li>
+                    <li>语法错误、异常排版、不专业的设计语言</li>
+                    <li>未通过企业微信/Teams等内部渠道同步通知</li>
+                    <li>登录页未启用多因素认证 (MFA)</li>
+                </ul>
+            </div>
+            <div class="line"><span class="prompt">sec-admin@rinnai:~$</span> <span class="cmd">cat ./what_to_do_next.txt</span></div>
+            <div class="line"><span class="success">>> 停下来 —— 不要点击任何链接或下载附件</span></div>
+            <div class="line"><span class="success">>> 仔细看 —— 检查发件人地址、链接URL、邮件格式</span></div>
+            <div class="line"><span class="success">>> 单独确认 —— 通过电话/企业微信向发件人核实</span></div>
+            <div class="line"><span class="success">>> 报告IT —— 转发可疑邮件至 IT@rinnai.com.cn</span></div>
+            <div class="line">&nbsp;</div>
+            <div class="line"><span class="prompt">sec-admin@rinnai:~$</span> <span class="cmd">./security_score --check</span></div>
+            <div class="line"><span class="output">您的安全感知分数: </span><span class="warn">▲ 需要加强</span></div>
+            <div class="line"><span class="output">建议完成安全知识学习课程以提升评分。</span></div>
+            <div class="line"><span class="prompt">sec-admin@rinnai:~$</span> <span class="blink-cursor"></span></div>
+            <div class="btn-group">
+                <a href="https://rinnaichina.sharepoint.com/sites/m365" class="term-btn btn-primary">[ 访问安全知识库 ]</a>
+                <a href="https://rinnaichina.sharepoint.com/sites/m365" class="term-btn btn-ghost">[ 了解更多 ]</a>
+            </div>
+            <div class="line" style="text-align:center;color:#5c6278;font-size:11px;">IT-SEC | 上海林内有限公司 | 报告可疑活动: CERT@rinnai.com.cn</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

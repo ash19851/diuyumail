@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全通知 — 上海林内</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: #e8ecf1;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.8;
+            color: #333;
+        }
+        .card {
+            max-width: 680px;
+            width: 100%;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+        .card-top {
+            padding: 28px 28px 0;
+            text-align: center;
+        }
+        .card-top .icon-circle {
+            display: inline-flex;
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            background: #fee2e2;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        .card-top h1 { font-size: 20px; font-weight: 700; color: #111; }
+        .card-top .byline { font-size: 12px; color: #888; margin-top: 2px; }
+
+        .card-body { padding: 20px 28px 28px; }
+
+        .msg-box {
+            background: #fef9f9;
+            border: 1px solid #fdd;
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+        }
+        .msg-box h3 { font-size: 15px; color: #c0392b; margin-bottom: 6px; }
+        .msg-box p { font-size: 14px; color: #555; }
+
+        .hit-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 18px 0;
+        }
+        .hit-counter .big-num { font-size: 48px; font-weight: 800; color: #e74c3c; line-height: 1; }
+        .hit-counter .big-label { font-size: 13px; color: #92400e; }
+
+        h4 { font-size: 15px; color: #111; margin: 20px 0 10px; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .grid-item {
+            background: #f9fafb;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 13px;
+        }
+        .grid-item strong { display: block; color: #111; margin-bottom: 2px; }
+
+        .red-list {
+            background: #fef9f9;
+            border: 1px solid #fee;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-top: 14px;
+        }
+        .red-list li { font-size: 13px; color: #666; padding: 2px 0; margin-left: 18px; }
+
+        .card-foot {
+            background: #fafbfc;
+            border-top: 1px solid #eee;
+            padding: 14px 28px;
+            text-align: center;
+            font-size: 11px;
+            color: #aaa;
+        }
+        .card-foot strong { color: #777; }
+
+        @media (max-width: 500px) { .grid-2 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-top">
+            <div class="icon-circle">🔒</div>
+            <h1>安全意识培训通知</h1>
+            <p class="byline">上海林内有限公司 · IT室</p>
+        </div>
+        <div class="card-body">
+            <div class="msg-box">
+                <h3>⚠ 您点击了模拟钓鱼链接</h3>
+                <p>这是IT室组织的内部安全培训——您并未被真正攻击。但真实世界的钓鱼攻击每天都在发生，且比本次模拟更具欺骗性。</p>
+            </div>
+
+            <div class="hit-counter">
+                <div class="big-num">1</div>
+                <div class="big-label">本年度已是第 1 次在安全测试中<br>点击了可疑链接，请务必提高警惕</div>
+            </div>
+
+            <h4>📋 防钓鱼检查清单</h4>
+            <div class="grid-2">
+                <div class="grid-item">
+                    <strong>🔍 检查发件人</strong>
+                    仔细核对发件邮箱完整地址
+                </div>
+                <div class="grid-item">
+                    <strong>🖱 悬停看链接</strong>
+                    鼠标悬停查看真实跳转地址
+                </div>
+                <div class="grid-item">
+                    <strong>⏱ 不急不躁</strong>
+                    紧急语气是钓鱼的经典信号
+                </div>
+                <div class="grid-item">
+                    <strong>📞 独立确认</strong>
+                    通过电话/微信向发件人核实
+                </div>
+            </div>
+
+            <h4>🚩 本次邮件的疑点</h4>
+            <ul class="red-list">
+                <li>链接指向外部域名，非公司内部系统</li>
+                <li>点击后的页面非公司标准认证界面</li>
+                <li>未通过其他内部渠道同步通知</li>
+                <li>邮件措辞制造不必要的紧迫感</li>
+            </ul>
+        </div>
+        <div class="card-foot">
+            <p><strong>IT室</strong> | 上海林内有限公司 &nbsp;·&nbsp; 可疑邮件请报告 IT@rinnai.com.cn</p>
+        </div>
+    </div>
+</body>
+</html>
